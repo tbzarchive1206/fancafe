@@ -18,6 +18,14 @@ test("English-only interface has no language switcher", async () => {
   assert.doesNotMatch(source, /langToggle|tbzFancafeLang|\bko\s*:/u);
 });
 
+test("folder picker matches the archive style and excluded members are not filters", async () => {
+  const home = await read("index.html");
+  const app = await read("from-the-boyz/app.js");
+  assert.match(home, /member-picker fancafe-picker/);
+  assert.match(home, /member-grid folder-grid/);
+  assert.doesNotMatch(app, /NEW \/ CHANHEE|HAKNYEON/);
+});
+
 test("blog content is embedded and sanitized", async () => {
   const context = { window: {} };
   vm.createContext(context);

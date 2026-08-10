@@ -1,6 +1,6 @@
 const POSTS = window.FANCAFE_POSTS || [];
 const CONTENT = window.FANCAFE_CONTENT || {};
-const MEMBERS = ["SANGYEON", "JACOB", "YOUNGHOON", "HYUNJAE", "JUYEON", "KEVIN", "NEW / CHANHEE", "Q / CHANGMIN", "HAKNYEON", "SUNWOO", "ERIC"];
+const MEMBERS = ["SANGYEON", "JACOB", "YOUNGHOON", "HYUNJAE", "JUYEON", "KEVIN", "Q / CHANGMIN", "SUNWOO", "ERIC"];
 const YEARS = [...new Set(POSTS.map((post) => post.year).filter(Boolean))].sort((a, b) => b - a);
 const state = { member: "all", year: "all", query: "", shown: 30, current: null };
 const $ = (selector) => document.querySelector(selector);
