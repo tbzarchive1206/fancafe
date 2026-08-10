@@ -20,9 +20,11 @@ test("English-only interface has no language switcher", async () => {
 
 test("folder picker matches the archive style and excluded members are not filters", async () => {
   const home = await read("index.html");
+  const postsPage = await read("from-the-boyz/index.html");
   const app = await read("from-the-boyz/app.js");
   assert.match(home, /member-picker fancafe-picker/);
   assert.match(home, /member-grid folder-grid/);
+  assert.match(postsPage, /<strong>09<\/strong>\s*<span data-i18n="members">MEMBERS<\/span>/);
   assert.doesNotMatch(app, /NEW \/ CHANHEE|HAKNYEON/);
 });
 
