@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#1746d1">
+  <title>From The Boyz — Fancafe Archive</title>
+  <meta name="description" content="Read archived FROM THE BOYZ fancafe posts and browse them as a gallery.">
+  <link rel="stylesheet" href="../styles.css">
+  <link rel="stylesheet" href="blog.css">
+</head>
+<body>
+  <main id="top">
+    <header class="masthead">
+      <div class="utility"><a class="brand" href="../">FANCAFE / ARCHIVE</a><nav><span>FROM THE BOYZ</span><span>/</span><a href="https://x.com/tbzarchive1206_" target="_blank" rel="noopener noreferrer">TWITTER ↗</a></nav></div>
+      <h1><span class="solid">FROM THE</span><span class="outline">BOYZ</span></h1>
+      <div class="stats"><p><strong id="postCount">1,443</strong> <span data-i18n="posts">POSTS</span></p><i></i><p><strong>11</strong> <span data-i18n="members">MEMBERS</span></p><i></i><p><strong>2017—2024</strong></p></div>
+    </header>
+    <section class="controls" aria-label="Archive controls">
+      <label class="search"><span aria-hidden="true">⌕</span><input id="search" type="search" placeholder="SEARCH POSTS..." autocomplete="off"></label>
+      <div class="filter-row"><label><span data-i18n="member">MEMBER</span><select id="memberFilter"><option value="all">ALL MEMBERS</option></select></label><label><span data-i18n="year">YEAR</span><select id="yearFilter"><option value="all">ALL YEARS</option></select></label></div>
+      <div class="year-tabs" id="yearTabs" aria-label="Filter by year"></div>
+    </section>
+    <section class="archive-section">
+      <div class="results-head"><p id="resultsLabel">ALL POSTS</p><a class="source-link" href="https://drive.google.com/drive/folders/1J7mLHg-fEOcCByqM8OeuT0Voo6YsnD55" target="_blank" rel="noopener noreferrer"><span data-i18n="videos">OPEN VIDEOS</span> ↗</a></div>
+      <div class="posts" id="posts" aria-live="polite"></div>
+      <div class="empty" id="empty" hidden><strong>NO RESULTS</strong><span data-i18n="empty">TRY CHANGING THE SEARCH OR FILTERS.</span></div>
+      <button class="load-more" id="loadMore" type="button">LOAD MORE ↓</button>
+    </section>
+    <footer><a href="../">← <span data-i18n="fancafeArchive">FANCAFE ARCHIVE</span></a><a href="#top"><span data-i18n="backTop">BACK TO TOP</span> ↑</a></footer>
+  </main>
+  <dialog id="reader" aria-labelledby="readerTitle"><div class="reader-shell"><header class="reader-head"><div><div class="reader-kicker" id="readerKicker"></div><h2 id="readerTitle"></h2></div><div class="reader-actions"><a id="downloadPost" href="#" target="_blank" rel="noopener noreferrer">DOWNLOAD PDF ↓</a><a id="originalPost" href="#" target="_blank" rel="noopener noreferrer">OPEN ORIGINAL ↗</a><button id="closeReader" type="button" aria-label="Close">×</button></div></header><article class="reader-article" id="readerArticle" hidden></article><div class="reader-frame" id="readerFrameWrap" hidden><iframe id="readerFrame" title="Archived post reader" loading="lazy" allowfullscreen></iframe></div><p class="reader-note">TEXT IS DISPLAYED AS A BLOG POST. IMAGES AND ORIGINAL FORMATTING ARE AVAILABLE THROUGH “OPEN ORIGINAL”.</p></div></dialog>
+  <script src="posts.js"></script>
+  <script src="content.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

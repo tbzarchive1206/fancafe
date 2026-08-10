@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#1746d1">
+  <title>THE BOYZ ALBUM — Fancafe Archive</title>
+  <meta name="description" content="Photo gallery archive of scene of THE BOYZ and THE BOYZ DIARY.">
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+  <main id="top">
+    <header class="masthead">
+      <div class="utility"><a class="brand" href="../">FANCAFE / ARCHIVE</a><nav><span>THE BOYZ ALBUM</span><span>/</span><a href="https://x.com/tbzarchive1206_" target="_blank" rel="noopener noreferrer">TWITTER ↗</a></nav></div>
+      <h1><span class="solid">THE BOYZ</span><span class="outline">ALBUM</span></h1>
+      <div class="stats"><p><strong id="galleryCount">137</strong> <span data-i18n="galleries">GALLERIES</span></p><i></i><p><strong id="photoCount">2,733</strong> <span data-i18n="photos">PHOTOS</span></p><i></i><p><strong>02</strong> <span data-i18n="sections">SECTIONS</span></p></div>
+    </header>
+    <section class="controls" aria-label="Archive controls">
+      <label class="search"><span aria-hidden="true">⌕</span><input id="search" type="search" placeholder="SEARCH GALLERIES..." autocomplete="off"></label>
+      <div class="filter-row"><label><span data-i18n="section">SECTION</span><select id="sectionFilter"><option value="all">ALL SECTIONS</option></select></label><label><span data-i18n="sort">SORT</span><select id="sortFilter"><option value="newest">NEWEST FIRST</option><option value="oldest">OLDEST FIRST</option><option value="largest">MOST PHOTOS</option><option value="az">A—Z</option></select></label></div>
+      <div class="year-tabs" id="sectionTabs" aria-label="Filter by section"></div>
+    </section>
+    <section class="archive-section">
+      <div class="results-head"><p id="resultsLabel">ALL GALLERIES</p><a class="source-link" href="https://drive.google.com/drive/folders/1kEheizu2wUo1ceScmfrUu5A9Cxs0feRY" target="_blank" rel="noopener noreferrer"><span data-i18n="sourceFolder">OPEN SOURCE FOLDER</span> ↗</a></div>
+      <div class="posts" id="galleries" aria-live="polite"></div>
+      <div class="empty" id="empty" hidden><strong>NO RESULTS</strong><span data-i18n="empty">TRY CHANGING THE SEARCH OR FILTERS.</span></div>
+      <button class="load-more" id="loadMore" type="button">LOAD MORE ↓</button>
+    </section>
+    <footer><a href="../">← <span data-i18n="fancafeArchive">FANCAFE ARCHIVE</span></a><a href="#top"><span data-i18n="backTop">BACK TO TOP</span> ↑</a></footer>
+  </main>
+  <dialog id="galleryDialog" aria-labelledby="dialogTitle"><div class="gallery-shell"><header class="gallery-head"><div><div class="gallery-kicker" id="dialogKicker"></div><h2 id="dialogTitle"></h2></div><div class="gallery-actions"><a id="dialogDrive" href="#" target="_blank" rel="noopener noreferrer"><span data-i18n="openFolder">OPEN FOLDER</span> ↗</a><button id="closeDialog" type="button" aria-label="Close">×</button></div></header><p class="gallery-note" data-i18n="downloadNote">USE “DOWNLOAD ↓” BELOW EACH PHOTO TO SAVE THE ORIGINAL FILE.</p><div class="photo-grid" id="photoGrid"></div><button class="load-more gallery-more" id="galleryMore" type="button">LOAD MORE PHOTOS ↓</button></div></dialog>
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
