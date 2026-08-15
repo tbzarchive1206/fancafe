@@ -1,6 +1,19 @@
 const POSTS = window.FANCAFE_POSTS || [];
 const CONTENT = window.FANCAFE_CONTENT || {};
-const MEMBERS = ["SANGYEON", "JACOB", "YOUNGHOON", "HYUNJAE", "JUYEON", "KEVIN", "Q / CHANGMIN", "SUNWOO", "ERIC"];
+const MEMBERS = [
+  { value: "SANGYEON", label: "SANGYEON" },
+  { value: "JACOB", label: "JACOB" },
+  { value: "YOUNGHOON", label: "YOUNGHOON" },
+  { value: "HYUNJAE", label: "HYUNJAE" },
+  { value: "JUYEON", label: "JUYEON" },
+  { value: "KEVIN", label: "KEVIN" },
+  { value: "Q / CHANGMIN", label: "Q" },
+  { value: "SUNWOO", label: "SUNWOO" },
+  { value: "ERIC", label: "ERIC" },
+  { value: "HWALL", label: "HWALL (2017 - 2019)" },
+  { value: "HAKNYEON", label: "HAKNYEON (2017 - 2025)" },
+  { value: "NEW / CHANHEE", label: "NEW (2017 - 2026)" }
+];
 const YEARS = [...new Set(POSTS.map((post) => post.year).filter(Boolean))].sort((a, b) => b - a);
 const state = { member: "all", year: "all", query: "", shown: 30, current: null };
 const $ = (selector) => document.querySelector(selector);
@@ -19,9 +32,10 @@ const preview = (post) => post.type === "pdf" ? `https://drive.google.com/file/d
 const original = (post) => post.type === "pdf" ? `https://drive.google.com/file/d/${encodeURIComponent(post.id)}/view` : `https://docs.google.com/document/d/${encodeURIComponent(post.id)}/view`;
 const download = (post) => post.type === "pdf" ? `https://drive.google.com/uc?export=download&id=${encodeURIComponent(post.id)}` : `https://docs.google.com/document/d/${encodeURIComponent(post.id)}/export?format=pdf`;
 const displayDate = (post) => post.date ? post.date.replaceAll("-", ".") : "DATE UNKNOWN";
+const displayMember = (value) => MEMBERS.find((member) => member.value === value)?.label || value;
 
 function setupFilters() {
-  MEMBERS.forEach((member) => memberFilter.insertAdjacentHTML("beforeend", `<option value="${esc(member)}">${esc(member)}</option>`));
+  MEMBERS.forEach((member) => memberFilter.insertAdjacentHTML("beforeend", `<option value="${esc(member.value)}">${esc(member.label)}</option>`));
   YEARS.forEach((year) => yearFilter.insertAdjacentHTML("beforeend", `<option value="${year}">${year}</option>`));
   renderYearTabs();
 }
@@ -41,8 +55,8 @@ function filtered() {
 function renderPosts() {
   const list = filtered();
   const visible = list.slice(0, state.shown);
-  $("#resultsLabel").textContent = `${state.member === "all" ? "ALL POSTS" : state.member} · ${list.length.toLocaleString("en-US")}`;
-  postsEl.innerHTML = visible.map((post, index) => `<article class="post-card"><button class="post-thumb" type="button" data-read="${esc(post.id)}" aria-label="${esc(`READ POST: ${post.title}`)}"><img src="${thumb(post.id)}" alt="" loading="lazy"><span class="number">${String(index + 1).padStart(3, "0")}</span><span class="read-tag">READ POST →</span></button><div class="post-info"><div class="eyebrow">${esc(post.member)}</div><h2>${esc(post.title)}</h2><div class="meta"><span>DATE</span><b>${displayDate(post)}</b><span>MEMBER</span><b>${esc(post.member)}</b></div><div class="post-actions"><button type="button" data-read="${esc(post.id)}">READ POST →</button><a href="${download(post)}" target="_blank" rel="noopener noreferrer">PDF ↓</a></div></div></article>`).join("");
+  $("#resultsLabel").textContent = `${state.member === "all" ? "ALL POSTS" : displayMember(state.member)} · ${list.length.toLocaleString("en-US")}`;
+  postsEl.innerHTML = visible.map((post, index) => `<article class="post-card"><button class="post-thumb" type="button" data-read="${esc(post.id)}" aria-label="${esc(`READ POST: ${post.title}`)}"><img src="${thumb(post.id)}" alt="" loading="lazy"><span class="number">${String(index + 1).padStart(3, "0")}</span><span class="read-tag">READ POST →</span></button><div class="post-info"><div class="eyebrow">${esc(displayMember(post.member))}</div><h2>${esc(post.title)}</h2><div class="meta"><span>DATE</span><b>${displayDate(post)}</b><span>MEMBER</span><b>${esc(displayMember(post.member))}</b></div><div class="post-actions"><button type="button" data-read="${esc(post.id)}">READ POST →</button><a href="${download(post)}" target="_blank" rel="noopener noreferrer">PDF ↓</a></div></div></article>`).join("");
   $("#empty").hidden = list.length > 0;
   loadMore.hidden = state.shown >= list.length;
 }
@@ -52,7 +66,7 @@ function openReader(id) {
   if (!post) return;
   state.current = post;
   $("#readerTitle").textContent = post.title;
-  $("#readerKicker").textContent = `${post.member} · ${displayDate(post)}`;
+  $("#readerKicker").textContent = `${displayMember(post.member)} · ${displayDate(post)}`;
   $("#downloadPost").href = download(post);
   $("#originalPost").href = original(post);
   const article = CONTENT[post.id];

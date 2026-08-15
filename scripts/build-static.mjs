@@ -4,6 +4,7 @@ const root = new URL("../", import.meta.url);
 const dist = new URL("../dist/", import.meta.url);
 const files = [
   "index.html",
+  "icon.png",
   "styles.css",
   "from-the-boyz/index.html",
   "from-the-boyz/app.js",

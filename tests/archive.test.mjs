@@ -18,14 +18,24 @@ test("English-only interface has no language switcher", async () => {
   assert.doesNotMatch(source, /langToggle|tbzFancafeLang|\bko\s*:/u);
 });
 
-test("folder picker matches the archive style and excluded members are not filters", async () => {
+test("folder picker matches the archive style and member filters use the requested order", async () => {
   const home = await read("index.html");
   const postsPage = await read("from-the-boyz/index.html");
   const app = await read("from-the-boyz/app.js");
   assert.match(home, /member-picker fancafe-picker/);
   assert.match(home, /member-grid folder-grid/);
-  assert.match(postsPage, /<strong>09<\/strong>\s*<span data-i18n="members">MEMBERS<\/span>/);
-  assert.doesNotMatch(app, /NEW \/ CHANHEE|HAKNYEON/);
+  assert.doesNotMatch(postsPage, /data-i18n="members">MEMBERS|09 MEMBERS/);
+  const labels = [...app.matchAll(/\{ value: "[^"]+", label: "([^"]+)" \}/g)].map((match) => match[1]);
+  assert.deepEqual(labels, [
+    "SANGYEON", "JACOB", "YOUNGHOON", "HYUNJAE", "JUYEON", "KEVIN", "Q",
+    "SUNWOO", "ERIC", "HWALL (2017 - 2019)", "HAKNYEON (2017 - 2025)", "NEW (2017 - 2026)",
+  ]);
+});
+
+test("every page has the archive favicon and the static build copies it", async () => {
+  const pages = await Promise.all([read("index.html"), read("from-the-boyz/index.html"), read("the-boyz-album/index.html")]);
+  pages.forEach((page) => assert.match(page, /<link rel="icon" type="image\/png" href="(?:\.\.\/)?icon\.png">/));
+  assert.match(await read("scripts/build-static.mjs"), /"icon\.png"/);
 });
 
 test("blog content is embedded and sanitized", async () => {
